@@ -11,6 +11,7 @@ namespace PSpaceStatusChanger
         static TrayIcon pi;
         static Timer tim;
         static int oldstatus = -5;
+        static int olddate = 0;
         static void Main()
         {
             EnableAutoStartup();
@@ -37,15 +38,25 @@ namespace PSpaceStatusChanger
             {
                 if (newstatus == 1)
                 {
-                    pi.ShowMessage("P-Space is now open!");
+                    pi.ShowMessage("P-Space Status Changed", "P-Space is now open!");
                     pi.SetOpen();
                 }
                 else
                 {
-                    pi.ShowMessage("P-Space is now closed!");
+                    pi.ShowMessage("P-Space Status Changed","P-Space is now closed!");
                     pi.SetClosed();
                 }
                 oldstatus = newstatus;
+            }
+
+            var lastevents = Requests.GetLastEvents(1);
+            if (lastevents[0].t != olddate)
+            {
+                if (olddate!=0)
+                {
+                    pi.ShowMessage("P-Space Door Event", lastevents[0].extra);
+                }
+                olddate = lastevents[0].t; 
             }
         }
 

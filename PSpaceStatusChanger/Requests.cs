@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using PSpaceStatusChanger;
 
 namespace PSpaceStatusChanger
 {
@@ -19,6 +20,14 @@ namespace PSpaceStatusChanger
             {
                 wc.DownloadString("http://www.p-space.gr/status/set.php?close");
             }
+        }
+
+        public static List<JSON_resp.Event> GetLastEvents(int history)
+        {
+            WebClient wc = new WebClient();
+            var response = wc.DownloadString("http://pspace.dyndns.org:88/report/?limit="+history+"&json");
+            var data = Newtonsoft.Json.JsonConvert.DeserializeObject<JSON_resp.RootObject>(response);
+            return data.events;            
         }
 
         public static int CheckStatus()

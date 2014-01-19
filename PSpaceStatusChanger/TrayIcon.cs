@@ -10,6 +10,7 @@ namespace PSpaceStatusChanger
     class TrayIcon : IDisposable
     {
         NotifyIcon nIc;
+        bool showsMessage = false;
 
         public TrayIcon()
         {
@@ -33,9 +34,9 @@ namespace PSpaceStatusChanger
             nIc.Icon = Resources.open;
         }
 
-        public void ShowMessage(string msg)
+        public void ShowMessage(string header,string msg)
         {
-            nIc.ShowBalloonTip(3000, "P-Space Status Changed", msg, ToolTipIcon.Info);
+            nIc.ShowBalloonTip(3000, header, msg, ToolTipIcon.Info);
         }
 
         public void SetClosed()

@@ -51,6 +51,17 @@ namespace PSpaceStatusChanger
             sep = new ToolStripSeparator();
             menu.Items.Add(sep);
 
+            // History.
+            item = new ToolStripMenuItem();
+            item.Image = Resources.History_32;
+            item.Text = "Last event";
+            item.Click += new EventHandler(last_Click);
+            menu.Items.Add(item);
+
+            // Separator.
+            sep = new ToolStripSeparator();
+            menu.Items.Add(sep);
+
             // Exit.
             item = new ToolStripMenuItem();
             item.Text = "Exit";
@@ -77,6 +88,14 @@ namespace PSpaceStatusChanger
         {
             Requests.SetStatus(false);
             //Program.pi.SetClosed();
+        }
+
+        void last_Click(object sender, EventArgs e)
+        {
+            var status = Requests.CheckStatus();
+            var last = Requests.GetLastEvents(1);
+            var str = "P-Space is: "+((status==1)?"Open":"Closed")+"\nLast event: "+last[0].extra;
+            MessageBox.Show(str,"P-Space Status and History");
         }
 
         void Exit_Click(object sender, EventArgs e)
