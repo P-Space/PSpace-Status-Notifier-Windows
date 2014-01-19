@@ -40,6 +40,17 @@ namespace PSpaceStatusChanger
             sep = new ToolStripSeparator();
             menu.Items.Add(sep);
 
+            // Options.
+            item = new ToolStripMenuItem();
+            item.Image = Resources.Options_32;
+            item.Text = "Options";
+            item.Click += new EventHandler(options_Click);
+            menu.Items.Add(item);
+
+            // Separator.
+            sep = new ToolStripSeparator();
+            menu.Items.Add(sep);
+
             // Exit.
             item = new ToolStripMenuItem();
             item.Text = "Exit";
@@ -48,6 +59,12 @@ namespace PSpaceStatusChanger
             menu.Items.Add(item);
 
             return menu;
+        }
+
+        void options_Click(object sender, EventArgs e)
+        {
+            Options opt = new Options();
+            opt.Show();
         }
 
         void open_Click(object sender, EventArgs e)

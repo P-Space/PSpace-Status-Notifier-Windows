@@ -93,6 +93,16 @@ namespace PSpaceStatusChanger.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Options_32 {
+            get {
+                object obj = ResourceManager.GetObject("Options_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Shop_Closed_32 {
             get {
                 object obj = ResourceManager.GetObject("Shop_Closed_32", resourceCulture);

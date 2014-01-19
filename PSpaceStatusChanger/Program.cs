@@ -49,7 +49,7 @@ namespace PSpaceStatusChanger
             }
         }
 
-        static void EnableAutoStartup()
+        public static void EnableAutoStartup()
         {
             // The path to the key where Windows looks for startup applications
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -59,7 +59,7 @@ namespace PSpaceStatusChanger
                 rkApp.SetValue("PSpaceNotifier", Application.ExecutablePath.ToString());
         }
 
-        static void DisableAutoStartup()
+        public static void DisableAutoStartup()
         {
             // The path to the key where Windows looks for startup applications
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -69,7 +69,7 @@ namespace PSpaceStatusChanger
                 rkApp.DeleteValue("PSpaceNotifier", false);
         }
 
-        private static bool IsStartupItem()
+        public static bool IsStartupItem()
         {
             // The path to the key where Windows looks for startup applications
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
