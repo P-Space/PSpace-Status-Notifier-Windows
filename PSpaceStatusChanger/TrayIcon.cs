@@ -10,7 +10,7 @@ namespace PSpaceStatusChanger
     class TrayIcon : IDisposable
     {
         NotifyIcon nIc;
-        bool showsMessage = false;
+        //bool showsMessage = false;
 
         public TrayIcon()
         {
@@ -19,8 +19,6 @@ namespace PSpaceStatusChanger
 
         public void Display()
         {
-            // Put the icon in the system tray and allow it react to mouse clicks.			
-            //nIc.MouseClick += new MouseEventHandler(ni_MouseClick);
             nIc.Icon = Resources.closed;
             nIc.Text = "P-Space Notifier";
             nIc.Visible = true;
@@ -32,6 +30,7 @@ namespace PSpaceStatusChanger
         public void SetOpen()
         {
             nIc.Icon = Resources.open;
+            nIc.Text = "P-Space is now open!";
         }
 
         public void ShowMessage(string header,string msg)
@@ -42,6 +41,7 @@ namespace PSpaceStatusChanger
         public void SetClosed()
         {
             nIc.Icon = Resources.closed;
+            nIc.Text = "P-Space is now closed!";
         }
 
         public void Dispose()
