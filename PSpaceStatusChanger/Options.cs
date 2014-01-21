@@ -35,6 +35,8 @@ namespace PSpaceStatusChanger
                 IsEnabledLbl.ForeColor = Color.DarkRed;
                 ToggleActionBtn.Text = "Enable Autorun";
             }
+
+            TimeIntTxt.Text = Properties.Settings.Default.refresh_interval.ToString();
         }
 
         private void ToggleActionBtn_Click(object sender, EventArgs e)
@@ -48,6 +50,23 @@ namespace PSpaceStatusChanger
                 Program.EnableAutoStartup();
             }
             Options_Load(null, null);
+        }
+
+        private void SetTimeBtn_Click(object sender, EventArgs e)
+        {
+            int time = 1;
+
+            if (Int32.TryParse(TimeIntTxt.Text, out time) && time > 0)
+                Properties.Settings.Default.refresh_interval = time;
+            else
+                MessageBox.Show("You've set an invalid value");
+
+            SetTimeBtn.Text = "Done!";
+            SetTimeBtn.Enabled = false;
+
+            Program.UpdateTime();
+
+            Properties.Settings.Default.Save();
         }
 
     }

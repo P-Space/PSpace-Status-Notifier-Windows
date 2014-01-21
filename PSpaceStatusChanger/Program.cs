@@ -25,7 +25,7 @@ namespace PSpaceStatusChanger
 
             tim = new Timer();
             tim.Tick += new EventHandler(tim_Tick);
-            tim.Interval = 1000;
+            UpdateTime();
             tim.Start();
 
             Application.Run();
@@ -58,6 +58,11 @@ namespace PSpaceStatusChanger
                 }
                 olddate = lastevents[0].t; 
             }
+        }
+
+        public static void UpdateTime()
+        {
+            tim.Interval = Properties.Settings.Default.refresh_interval * 1000;
         }
 
         public static void EnableAutoStartup()

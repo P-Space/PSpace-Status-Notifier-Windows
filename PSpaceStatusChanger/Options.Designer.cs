@@ -32,6 +32,9 @@
             this.IsEnabledLbl = new System.Windows.Forms.Label();
             this.ToggleActionBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TimeIntTxt = new System.Windows.Forms.TextBox();
+            this.SetTimeBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +59,7 @@
             // 
             // ToggleActionBtn
             // 
-            this.ToggleActionBtn.Location = new System.Drawing.Point(104, 61);
+            this.ToggleActionBtn.Location = new System.Drawing.Point(102, 54);
             this.ToggleActionBtn.Name = "ToggleActionBtn";
             this.ToggleActionBtn.Size = new System.Drawing.Size(111, 23);
             this.ToggleActionBtn.TabIndex = 2;
@@ -67,17 +70,47 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 119);
+            this.label3.Location = new System.Drawing.Point(34, 170);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(269, 13);
+            this.label3.Size = new System.Drawing.Size(260, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "P-Space Status and Event Notifier 1.0.1 # eparon-2013";
+            this.label3.Text = "P-Space Status and Event Notifier 1.1 # eparon-2013";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label2.Location = new System.Drawing.Point(31, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(165, 20);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Refresh Interval (sec):";
+            // 
+            // TimeIntTxt
+            // 
+            this.TimeIntTxt.Location = new System.Drawing.Point(202, 95);
+            this.TimeIntTxt.Name = "TimeIntTxt";
+            this.TimeIntTxt.Size = new System.Drawing.Size(61, 20);
+            this.TimeIntTxt.TabIndex = 5;
+            // 
+            // SetTimeBtn
+            // 
+            this.SetTimeBtn.Location = new System.Drawing.Point(102, 128);
+            this.SetTimeBtn.Name = "SetTimeBtn";
+            this.SetTimeBtn.Size = new System.Drawing.Size(111, 23);
+            this.SetTimeBtn.TabIndex = 6;
+            this.SetTimeBtn.Text = "Set";
+            this.SetTimeBtn.UseVisualStyleBackColor = true;
+            this.SetTimeBtn.Click += new System.EventHandler(this.SetTimeBtn_Click);
             // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(306, 141);
+            this.ClientSize = new System.Drawing.Size(306, 186);
+            this.Controls.Add(this.SetTimeBtn);
+            this.Controls.Add(this.TimeIntTxt);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ToggleActionBtn);
             this.Controls.Add(this.IsEnabledLbl);
@@ -95,5 +128,8 @@
         private System.Windows.Forms.Label IsEnabledLbl;
         private System.Windows.Forms.Button ToggleActionBtn;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox TimeIntTxt;
+        private System.Windows.Forms.Button SetTimeBtn;
     }
 }
