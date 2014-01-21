@@ -50,7 +50,7 @@ namespace PSpaceStatusChanger
             }
 
             var lastevents = Requests.GetLastEvents(1);
-            if (lastevents[0].t != olddate)
+            if (lastevents!=null && lastevents[0].t != olddate)
             {
                 if (olddate!=0)
                 {
