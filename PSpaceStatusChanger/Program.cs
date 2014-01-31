@@ -12,12 +12,20 @@ namespace PSpaceStatusChanger
         static Timer tim;
         static int oldstatus = -5;
         static int olddate = 0;
+
         static void Main()
         {
-            EnableAutoStartup();
+            //EnableAutoStartup();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //check if another process already running
+            if (System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1)
+            {
+                MessageBox.Show("Another instance is already running!");
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+            }
 
             pi = new TrayIcon();
             pi.Display();
@@ -90,7 +98,7 @@ namespace PSpaceStatusChanger
             // The path to the key where Windows looks for startup applications
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-            if (rkApp.GetValue("PSpaceNotifier") == null)
+            if ((rkApp.GetValue("PSpaceNotifier") == null) || (rkApp.GetValue("PSpaceNotifier").ToString() != Application.ExecutablePath.ToString()))
                 // The value doesn't exist, the application is not set to run at startup
                 return false;
             else

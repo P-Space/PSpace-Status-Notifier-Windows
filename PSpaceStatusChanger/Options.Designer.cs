@@ -74,7 +74,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(260, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "P-Space Status and Event Notifier 1.1 # eparon-2013";
+            this.label3.Text = "P-Space Status and Event Notifier 1.2 # eparon-2014";
             // 
             // label2
             // 
