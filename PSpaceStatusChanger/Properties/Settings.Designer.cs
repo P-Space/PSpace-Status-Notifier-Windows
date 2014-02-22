@@ -34,5 +34,17 @@ namespace PSpaceStatusChanger.Properties {
                 this["refresh_interval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int silent_mode {
+            get {
+                return ((int)(this["silent_mode"]));
+            }
+            set {
+                this["silent_mode"] = value;
+            }
+        }
     }
 }

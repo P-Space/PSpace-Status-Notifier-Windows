@@ -12,6 +12,7 @@ namespace PSpaceStatusChanger
         static Timer tim;
         static int oldstatus = -5;
         static int olddate = 0;
+        static int silent = 0;
 
         static void Main()
         {
@@ -27,6 +28,7 @@ namespace PSpaceStatusChanger
                 System.Diagnostics.Process.GetCurrentProcess().Kill();
             }
 
+            silent = Properties.Settings.Default.silent_mode;
             pi = new TrayIcon();
             pi.Display();
             // Make sure the application runs!
@@ -57,20 +59,28 @@ namespace PSpaceStatusChanger
                 oldstatus = newstatus;
             }
 
-            var lastevents = Requests.GetLastEvents(1);
-            if (lastevents!=null && lastevents[0].t != olddate)
+            if (silent!=1)
             {
-                if (olddate!=0)
+                var lastevents = Requests.GetLastEvents(1);
+                if (lastevents != null && lastevents[0].t != olddate)
                 {
-                    pi.ShowMessage("P-Space Door Event", lastevents[0].extra);
-                }
-                olddate = lastevents[0].t; 
+                    if (olddate != 0)
+                    {
+                        pi.ShowMessage("P-Space Door Event", lastevents[0].extra);
+                    }
+                    olddate = lastevents[0].t;
+                } 
             }
         }
 
         public static void UpdateTime()
         {
             tim.Interval = Properties.Settings.Default.refresh_interval * 1000;
+        }
+
+        public static void UpdateSilent()
+        {
+            silent = Properties.Settings.Default.silent_mode;
         }
 
         public static void EnableAutoStartup()

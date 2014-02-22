@@ -12,6 +12,7 @@ namespace PSpaceStatusChanger
     public partial class Options : Form
     {
         bool autorun_enabled = false;
+        int silent = 0;
 
         public Options()
         {
@@ -22,34 +23,35 @@ namespace PSpaceStatusChanger
         void Options_Load(object sender, EventArgs e)
         {
             autorun_enabled = Program.IsStartupItem();
+            silent = Properties.Settings.Default.silent_mode;
 
             if (autorun_enabled)
             {
                 IsEnabledLbl.Text = "ENABLED";
                 IsEnabledLbl.ForeColor = Color.DarkGreen;
-                ToggleActionBtn.Text = "Disable Autorun";
+                AutoRunChkBox.Checked = true;
             }
             else
             {
                 IsEnabledLbl.Text = "DISABLED";
                 IsEnabledLbl.ForeColor = Color.DarkRed;
-                ToggleActionBtn.Text = "Enable Autorun";
+                AutoRunChkBox.Checked = false;
             }
 
-            TimeIntTxt.Text = Properties.Settings.Default.refresh_interval.ToString();
-        }
-
-        private void ToggleActionBtn_Click(object sender, EventArgs e)
-        {
-            if (autorun_enabled)
+            if (silent==1)
             {
-                Program.DisableAutoStartup();
+                SilentIsEnabledLbl.Text = "ENABLED";
+                SilentIsEnabledLbl.ForeColor = Color.DarkGreen;
+                SilentChkBox.Checked = true;
             }
             else
             {
-                Program.EnableAutoStartup();
+                SilentIsEnabledLbl.Text = "DISABLED";
+                SilentIsEnabledLbl.ForeColor = Color.DarkRed;
+                SilentChkBox.Checked = false;
             }
-            Options_Load(null, null);
+
+            TimeIntTxt.Text = Properties.Settings.Default.refresh_interval.ToString();
         }
 
         private void SetTimeBtn_Click(object sender, EventArgs e)
@@ -64,9 +66,37 @@ namespace PSpaceStatusChanger
             SetTimeBtn.Text = "Done!";
             SetTimeBtn.Enabled = false;
 
-            Program.UpdateTime();
-
             Properties.Settings.Default.Save();
+
+            Program.UpdateTime();            
+        }
+
+        private void AutoRunChkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autorun_enabled)
+            {
+                Program.DisableAutoStartup();
+            }
+            else
+            {
+                Program.EnableAutoStartup();
+            }
+            Options_Load(null, null);
+        }
+
+        private void SilentChkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (silent==1)
+            {
+                Properties.Settings.Default.silent_mode = 0;
+            }
+            else
+            {
+                Properties.Settings.Default.silent_mode = 1;
+            }
+            Options_Load(null, null);
+            Properties.Settings.Default.Save();
+            Program.UpdateSilent();
         }
 
     }
