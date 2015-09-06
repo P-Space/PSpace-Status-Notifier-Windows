@@ -32,10 +32,16 @@ namespace PSpaceStatusChanger
 
         public static List<JSON_resp.Event> GetLastEvents(int history)
         {
+            string url = "";
             WebClient wc = new WebClient();
             try
             {
-                var response = wc.DownloadString("http://pspace.dyndns.org:88/report/?limit=" + history + "&json");
+                var ip_addr = wc.DownloadString("http://ip.42.pl/raw");
+                if (ip_addr == "195.97.37.145")
+                    url = "http://192.168.1.41/report/?json&limit=1";
+                else
+                    url = "http://pspace.dyndns.org:88/report/?limit=" + history + "&json";
+                var response = wc.DownloadString(url);
                 var data = Newtonsoft.Json.JsonConvert.DeserializeObject<JSON_resp.RootObject>(response);
                 return data.events;
             }
